@@ -1,5 +1,6 @@
 # dwm 6.1 (customized)
-This is a dynamic window manager from suckless.org, with the following patches[^1] applied:
+
+This is a dynamic window manager from suckless.org, with the following patches<sup id="a1">[[1]](#f1)</sup> applied:
 * autoresize
 * bottomstack
 * center
@@ -9,4 +10,5 @@ This is a dynamic window manager from suckless.org, with the following patches[^
 * savefloats
 * sticky
 * systray
-[^1]: Some patches have been modified / fixed.
+##
+<span id="f1">1. Some patches have been modified / fixed. [&#8617;](#a1)</span>
