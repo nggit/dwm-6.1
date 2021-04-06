@@ -1423,7 +1423,7 @@ manage(Window w, XWindowAttributes *wa)
 
 	if (c->iscentered) {
 		c->x = (c->mon->mw - WIDTH(c)) / 2;
-		c->y = (c->mon->mh - HEIGHT(c) + c->y) / 2;
+		c->y = (c->mon->mh - HEIGHT(c)) / 2 + bh / 2 * topbar * showbar * !extrabar - bh / 2 * !topbar * showbar * !extrabar;
 	}
 
 	wc.border_width = c->bw;
@@ -2170,7 +2170,7 @@ togglebar(const Arg *arg)
 void
 toggleextrabar(const Arg *arg)
 {
-	if (selmon == mons) {
+	if (extrabar && selmon == mons) {
 		eb.show = !eb.show;
 		updatebarpos(selmon);
 		XMoveResizeWindow(dpy, eb.win, selmon->wx, eb.y, selmon->ww, bh);
