@@ -1339,8 +1339,14 @@ grabkeys(void)
 void
 incnmaster(const Arg *arg)
 {
-	selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag] = MAX(selmon->nmaster + arg->i, 0);
-	arrange(selmon);
+	unsigned int n;
+	Client *c;
+
+	for (n = 0, c = nexttiled(selmon->clients); c; c = nexttiled(c->next), n++) {
+		selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag] = MAX(selmon->nmaster + arg->i, 0);
+		arrange(selmon);
+		break;
+	}
 }
 
 #ifdef XINERAMA
@@ -1374,8 +1380,14 @@ keypress(XEvent *e)
 void
 killclient(const Arg *arg)
 {
+	unsigned int n;
+	Client *c;
+
 	if (!selmon->sel)
 		return;
+	for (n = 0, c = nexttiled(selmon->clients); c; c = nexttiled(c->next), n++);
+	if (n == 1) /* reset nmaster to its default value when killing the last client */
+		selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag] = nmaster;
 	if (!sendevent(selmon->sel->win, wmatom[WMDelete], NoEventMask, wmatom[WMDelete], CurrentTime, 0 , 0, 0)) {
 		XGrabServer(dpy);
 		XSetErrorHandler(xerrordummy);
