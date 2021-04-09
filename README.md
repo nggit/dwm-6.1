@@ -1,5 +1,6 @@
 # dwm 6.1 (customized)
-This is a dynamic window manager from suckless.org, with the following patches<sup id="a1">[[1]](#f1)</sup> applied:
+This is a dynamic window manager from suckless.org, with the following (minimal and useful) patches<sup id="a1">[[1]](#f1)</sup> applied:
+* attachaside
 * autoresize
 * bottomstack
 * center
@@ -39,6 +40,13 @@ Basic Shortcuts:
 | ALT + SHIFT + SPACE | Command | Toggle floating on a window |
 | ALT + SHIFT + C     | Command | Close a window              |
 | ALT + SHIFT + Q     | Command | Quit dwm                    |
+
+For the rest please check [config.def.h](config.def.h).
+## Tips
+If the window for a Java-based application goes blank, you can set the following environment variables as a workaround:
+```
+export _JAVA_AWT_WM_NONREPARENTING=1
+```
 ## Screenshot
 ![dstatus](screenshot.png)
 ##
