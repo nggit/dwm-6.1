@@ -516,11 +516,11 @@ bstack(Monitor *m) {
 	for (i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
 		if (i < m->nmaster) {
 			w = (m->ww - mx) / (MIN(n, m->nmaster) - i);
-			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), 0);
+			resize(c, m->wx + mx, m->wy, w - 2 * c->bw, mh - 2 * c->bw, 0);
 			mx += WIDTH(c);
 		} else {
 			h = m->wh - mh;
-			resize(c, tx, ty, tw - (2 * c->bw), h - (2 * c->bw), 0);
+			resize(c, tx, ty, tw - 2 * c->bw, h - 2 * c->bw, 0);
 			if (tw != m->ww)
 				tx += WIDTH(c);
 		}
@@ -547,10 +547,10 @@ bstackhoriz(Monitor *m) {
 	for (i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
 		if (i < m->nmaster) {
 			w = (m->ww - mx) / (MIN(n, m->nmaster) - i);
-			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), 0);
+			resize(c, m->wx + mx, m->wy, w - 2 * c->bw, mh - 2 * c->bw, 0);
 			mx += WIDTH(c);
 		} else {
-			resize(c, tx, ty, m->ww - (2 * c->bw), th - (2 * c->bw), 0);
+			resize(c, tx, ty, m->ww - 2 * c->bw, th - 2 * c->bw, 0);
 			if (th != m->wh)
 				ty += HEIGHT(c);
 		}
@@ -810,9 +810,9 @@ configurerequest(XEvent *e)
 				c->h = ev->height;
 			}
 			if ((c->x + c->w) > m->mx + m->mw && c->isfloating)
-				c->x = m->mx + (m->mw / 2 - WIDTH(c) / 2); /* center in x direction */
+				c->x = m->mx + (m->mw - WIDTH(c)) / 2; /* center in x direction */
 			if ((c->y + c->h) > m->my + m->mh && c->isfloating)
-				c->y = m->my + (m->mh / 2 - HEIGHT(c) / 2); /* center in y direction */
+				c->y = m->my + (m->mh - HEIGHT(c)) / 2; /* center in y direction */
 			if ((ev->value_mask & (CWX|CWY)) && !(ev->value_mask & (CWWidth|CWHeight)))
 				configure(c);
 			if (ISVISIBLE(c))
@@ -1198,23 +1198,23 @@ gaplessgrid(Monitor *m) {
 		return;
 
 	/* grid dimensions */
-	for (cols = 0; cols <= n/2; cols++)
-		if (cols*cols >= n)
+	for (cols = 0; cols <= n / 2; cols++)
+		if (cols * cols >= n)
 			break;
 	if (n == 5) /* set layout against the general calculation: not 1:2:2, but 2:3 */
 		cols = 2;
-	rows = n/cols;
+	rows = n / cols;
 
 	/* window geometries */
 	cw = cols ? m->ww / cols : m->ww;
 	cn = 0; /* current column number */
 	rn = 0; /* current row number */
 	for (i = 0, c = nexttiled(m->clients); c; i++, c = nexttiled(c->next)) {
-		if (i/rows + 1 > cols - n%cols)
-			rows = n/cols + 1;
+		if (i / rows + 1 > cols - n%cols)
+			rows = n / cols + 1;
 		ch = rows ? m->wh / rows : m->wh;
-		cx = m->wx + cn*cw;
-		cy = m->wy + rn*ch;
+		cx = m->wx + cn * cw;
+		cy = m->wy + rn * ch;
 		resize(c, cx, cy, cw - 2 * c->bw, ch - 2 * c->bw, False);
 		rn++;
 		if (rn >= rows) {
@@ -2174,11 +2174,11 @@ tile(Monitor *m)
 	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
 			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
-			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
+			resize(c, m->wx, m->wy + my, mw - 2 * c->bw, h - 2 *c->bw, 0);
 			my += HEIGHT(c);
 		} else {
 			h = (m->wh - ty) / (n - i);
-			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
+			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - 2 * c->bw, h - 2 * c->bw, 0);
 			ty += HEIGHT(c);
 		}
 }
@@ -2284,7 +2284,7 @@ toggleview(const Arg *arg)
 		selmon->mfact = selmon->pertag->mfacts[selmon->pertag->curtag];
 		selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
 		selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
-		selmon->lt[selmon->sellt^1] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt^1];
+		selmon->lt[selmon->sellt ^ 1] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt ^ 1];
 		focus(NULL);
 		arrange(selmon);
 	}
@@ -2752,7 +2752,7 @@ view(const Arg *arg)
 	selmon->mfact = selmon->pertag->mfacts[selmon->pertag->curtag];
 	selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
 	selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
-	selmon->lt[selmon->sellt^1] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt^1];
+	selmon->lt[selmon->sellt ^ 1] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt ^ 1];
 	focus(NULL);
 	arrange(selmon);
 }
