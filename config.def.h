@@ -30,11 +30,18 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     iscentered     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            0,             1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 3,       0,             0,           -1 },
-	{ "MPlayer",  NULL,       NULL,       0,            1,             1,           -1 },
-	{ "mpv",      NULL,       NULL,       0,            1,             1,           -1 },
+	/* class                   instance    title       tags mask     iscentered     isfloating   monitor */
+	{ "Chromium",              NULL,       NULL,       1 << 3,       0,             0,           -1 },
+	{ "feh",                   NULL,       NULL,       0,            1,             1,           -1 },
+	{ "Firefox",               NULL,       NULL,       1 << 3,       0,             0,           -1 },
+	{ "fontforge",             NULL,       NULL,       0,            1,             1,           -1 },
+	{ "Gcolor2",               NULL,       NULL,       0,            1,             1,           -1 },
+	{ "Gimp",                  NULL,       NULL,       0,            0,             1,           -1 },
+	{ "mpv",                   NULL,       NULL,       0,            1,             1,           -1 },
+	{ "SimpleScreenRecorder",  NULL,       NULL,       0,            1,             1,           -1 },
+	{ "Wine",                  NULL,       NULL,       0,            1,             1,           -1 },
+	{ "Xfd",                   NULL,       NULL,       0,            1,             1,           -1 },
+	{ "XFontSel",              NULL,       NULL,       0,            1,             1,           -1 },
 };
 
 /* layout(s) */
