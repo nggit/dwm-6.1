@@ -1449,7 +1449,7 @@ manage(Window w, XWindowAttributes *wa)
 
 	if (c->iscentered) {
 		c->x = (c->mon->mw - WIDTH(c)) / 2;
-		c->y = (c->mon->mh - HEIGHT(c)) / 2 + bh / 2 * topbar * showbar * !extrabar - bh / 2 * !topbar * showbar * !extrabar;
+		c->y = (c->mon->mh - HEIGHT(c) + bh * showbar * (extrabar ^ 1) * (topbar - (topbar ^ 1))) / 2;
 	}
 
 	wc.border_width = c->bw;
