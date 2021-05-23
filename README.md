@@ -2,6 +2,7 @@
 This is a dynamic window manager from suckless.org, with the following (minimal and useful) patches<sup id="a1">[[1]](#f1)</sup> applied:
 * attachaside
 * autoresize
+* [autostart](https://github.com/nggit/dwm-6.1/commit/e06e6ed2e0bc98311909f724f0fa448dd7f694a5)
 * bottomstack
 * center
 * dualstatus
@@ -47,7 +48,7 @@ If the window for a Java-based application goes blank, you can set the following
 ```
 export _JAVA_AWT_WM_NONREPARENTING=1
 ```
-## Screenshot
-![dstatus](screenshot.png)
+## Demo
+![dwm](dwm.gif)
 ##
 <span id="f1">1. Some patches have been modified / fixed. [&#8617;](#a1)</span>
