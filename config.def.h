@@ -6,11 +6,11 @@ static const char *fonts[] = {
 	"Monospace:size=10"
 };
 static const char dmenufont[]            = "Tamsyn:size=14";
-static const char normbordercolor[]      = "#90a0b0";
-static const char normbgcolor[]          = "#111111";
+static const char normbordercolor[]      = "#697079";
+static const char normbgcolor[]          = "#1b2026";
 static const char normfgcolor[]          = "#bbbbbb";
-static const char selbordercolor[]       = "#44b3c2";
-static const char selbgcolor[]           = "#44b3c2";
+static const char selbordercolor[]       = "#88c0d0";
+static const char selbgcolor[]           = "#88c0d0";
 static const char selfgcolor[]           = "#eeeeee";
 static const unsigned int borderpx       = 1;        /* border pixel of windows */
 static const unsigned int snap           = 32;       /* snap pixel */
@@ -88,18 +88,18 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      toggleextrabar, {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_Up,     focusstack,     {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_Down,   focusstack,     {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_Left,   focusstack,     {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_Right,  focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_Up,     moveresize,     {.v = "0x -25y 0w 0h" } },
+	{ MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 0h" } },
+	{ MODKEY,                       XK_Left,   moveresize,     {.v = "-25x 0y 0w 0h" } },
+	{ MODKEY,                       XK_Right,  moveresize,     {.v = "25x 0y 0w 0h" } },
+	{ MODKEY|ShiftMask,             XK_Up,     moveresize,     {.v = "0x 0y 0w -25h" } },
+	{ MODKEY|ShiftMask,             XK_Down,   moveresize,     {.v = "0x 0y 0w 25h" } },
+	{ MODKEY|ShiftMask,             XK_Left,   moveresize,     {.v = "0x 0y -25w 0h" } },
+	{ MODKEY|ShiftMask,             XK_Right,  moveresize,     {.v = "0x 0y 25w 0h" } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Up,     setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_Down,   setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Left,   setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_Right,  setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
