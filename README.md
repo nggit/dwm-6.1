@@ -8,6 +8,7 @@ This is a dynamic window manager from suckless.org, with the following (minimal 
 * dualstatus
 * [fancybarclickable](https://github.com/nggit/dwm-fancybarclickable-6.1)
 * gaplessgrid
+* moveresize
 * pertag
 * savefloats
 * sticky
